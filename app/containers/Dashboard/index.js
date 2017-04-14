@@ -15,6 +15,7 @@ export default class Dashboard extends React.PureComponent {
       speciality: "",
       physician: "",
       practice: "",
+      phone: "",
       website: ""
     }
   }
@@ -27,19 +28,25 @@ export default class Dashboard extends React.PureComponent {
   //console log shows whats happening with data. REMOVE logs when finished with project!!!
   handlePhysician = (event) => {
     this.setState({
-      body: event.target.value
+      physician: event.target.value
     })
     console.log(this.state.physician)
   }
   handlePractice = (event) => {
     this.setState({
-      speciality: event.target.value
+      practice: event.target.value
     })
     console.log(this.state.practice)
   }
+  handlePhone = (event) => {
+    this.setState({
+      phone: event.target.value
+    })
+    console.log(this.state.phone)
+  }
   handleWebsite = (event) => {
     this.setState({
-      speciality: event.target.value
+      website: event.target.value
     })
     console.log(this.state.website)
   }
@@ -49,11 +56,16 @@ export default class Dashboard extends React.PureComponent {
         data.append("speciality", this.state.speciality);
         data.append("physician", this.state.physician);
         data.append("practice", this.state.practice);
+        data.append("phone", this.state.phone);
         data.append("website", this.state.website);
 
         fetch ("http://localhost:8000/api/storeMember", {
           method: "post",
-          body: data
+          speciality: data,
+          physician: data,
+          practice: data,
+          phone: data,
+          website: data,
         })
         .then (function(response) {
           return response.json();
@@ -72,14 +84,12 @@ export default class Dashboard extends React.PureComponent {
     const titleStyle={
       width: "100%",
       height: "auto",
-      fontFamily: "Fredericka the Great",
-      fontStyle: "cursive",
-      fontWeight: "bold",
-      fontSize: "40px",
-      color: "#74D1EA",
+      fontFamily: "Raleway Dots",
+      fontSize: "30px",
+      color: "#EB9444",
       textAlign: "center",
-      paddingTop: "20px",
-      background: "#3E262A"
+      paddingTop: "5px",
+      background: "#31137C"
     }
     const headTextStyle={
       width: "100%",
@@ -87,7 +97,7 @@ export default class Dashboard extends React.PureComponent {
       top: "auto",
       borderTop:"3px solid #74D1EA",
       borderBottom:"3px solid #74D1EA",
-      background: "#FAE0EE",
+      background: "#E7DCEA",
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",
@@ -95,7 +105,7 @@ export default class Dashboard extends React.PureComponent {
       fontStyle: "cursive",
       fontWeight: "bold",
       fontSize: "40px",
-      color: "#3E262A",
+      color: "#31137C",
       textTransform: "uppercase",
       textAlign: "center",
       paddingTop: "10px"
@@ -104,7 +114,7 @@ export default class Dashboard extends React.PureComponent {
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",
-      background: "#FCFAF1",
+      background: "#E7DCEA",
       paddingTop: "30px",
       paddingLeft: "30px",
       paddingBottom: "30px"
@@ -119,28 +129,35 @@ export default class Dashboard extends React.PureComponent {
       width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "#999999",
+      background: "#BF1932",
       paddingLeft: "5px"
     }
     const preferredPhysician={
       width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "#888888",
+      background: "#D74388",
       paddingLeft: "5px"
     }
     const preferredPractice={
       width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "#777777",
+      background: "#DB7453",
+      paddingLeft: "5px"
+    }
+    const preferredPhone={
+      width: "100%",
+      display: "flex",
+      flexWrap: "auto",
+      background: "#D1B6E4",
       paddingLeft: "5px"
     }
     const preferredWebsite={
       width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "#666666",
+      background: "#FCFAF1",
       paddingLeft: "5px"
     }
     const inputSubmit={
@@ -155,12 +172,13 @@ export default class Dashboard extends React.PureComponent {
           Dashboard
         </div>
       <main>
-        <div style={titleStyle}> Enter UPA CIN Physician Membership Database Parts </div>
+        <div style={titleStyle}>Enter UPA CIN Physician Membership Database Parts</div>
         <div style={preferredContainer}>
           <div style={preferred}>
             <textarea style={preferredSpeciality} onChange={this.handleSpeciality} value={this.state.speciality} placeholder="Physician's Speciality"> </textarea>
             <textarea style={preferredPhysician} onChange={this.handlePhysician} value={this.state.physician} placeholder="Physician's Name"> </textarea>
             <textarea style={preferredPractice} onChange={this.handlePractice} value={this.state.practice} placeholder="Practice Name"> </textarea>
+            <textarea style={preferredPhone} onChange={this.handlePhone} value={this.state.phone} placeholder="Practice Phone Number"> </textarea>
             <textarea style={preferredWebsite} onChange={this.handleWebsite} value={this.state.website} placeholder="Practice Website Address"> </textarea>
             <input style={inputSubmit} onTouchTap={this.storeMember} type="submit"/>
           </div>
