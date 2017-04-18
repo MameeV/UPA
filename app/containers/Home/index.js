@@ -20,11 +20,6 @@ import NavMobile from 'components/NavMobile';
 export default class Home extends React.PureComponent {
 
   render() {
-    const divStyle={
-      width:"200px",
-      height:"400px",
-      background:"#3E262A"
-    }
     const titleStyle={
       borderTop:"3px solid #74D1EA",
       borderBottom:"3px solid #74D1EA",
@@ -36,9 +31,15 @@ export default class Home extends React.PureComponent {
       color: "#31137C",
       fontSize: "48px"
     }
-    const titleSize={
-      width: "100vh",
-      height: "60px"
+    const headingStyle={
+      margin: "15px"
+    }
+    const mainStyle={
+      display: "flex",
+      flexDirection: "row"
+    }
+    const indentStyle={
+      margin: "15px"
     }
     const bodyStyle={
       width: "100%",
@@ -49,48 +50,9 @@ export default class Home extends React.PureComponent {
       fontSize: "20px",
       color: "#31137C"
     }
-    const bodyStyleMobile={
-      width: "100%",
-      height: "100vh",
-      background: "#FAE0EE",
-      fontFamily: "Josefin Slab",
-      fontWeight: "Bold",
-      fontSize: "20px",
-      color: "#3E262A"
-    }
-    const mainStyle={
-      display: "flex",
-      flexDirection: "row"
-    }
-    const animeStyle={
-      borderRadius: "50%",
-      width: "100px",
-      height: "100px",
-      margin: "3px"
-    }
-    const mainphotoStyle={
-      borderRadius: "2%",
-      width: "450px",
-      height: "300px",
-      margin: "15px"
-    }
-    const mainphotoStyleMobile={
-      borderRadius: "2%",
-      width: "100%",
-      height: "300px"
-    }
-    const headingStyle={
-      margin: "15px"
-    }
-    const indentStyle={
-      margin: "15px"
-    }
-
 
 
     const preferredContainer={
-      display: "flex",
-      flexDirection: "row",
       justifyContent: "center",
       background: "#FCFAF1",
       paddingTop: "30px",
@@ -98,40 +60,49 @@ export default class Home extends React.PureComponent {
       paddingBottom: "30px"
     }
     const preferred={
-      width: "25%",
       height: "100%",
       display: "flex",
       flexDirection: "column"
     }
     const preferredSpeciality={
-      width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "999999",
+      background: "#BF1932",
       paddingLeft: "5px"
     }
     const preferredPhysician={
-      width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "999999",
+      background: "#D74388",
       paddingLeft: "5px"
     }
     const preferredPractice={
-      width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "999999",
+      background: "#DB7453",
+      paddingLeft: "5px"
+    }
+    const preferredPhone={
+      display: "flex",
+      flexWrap: "auto",
+      background: "#D1B6E4",
       paddingLeft: "5px"
     }
     const preferredWebsite={
-      width: "100%",
       display: "flex",
       flexWrap: "auto",
-      background: "999999",
+      background: "#FCFAF1",
       paddingLeft: "5px"
     }
-
+    const footerStyle={
+      background: "#EB9444",
+      display: "flex",
+      flexDirection: "row",
+      fontFamily:"Raleway",
+      fontWeight:"Bold",
+      color: "#31137C",
+      fontSize: "18px"
+    }
 
     return (
 
@@ -147,29 +118,41 @@ export default class Home extends React.PureComponent {
           </span>
         </header>
 
+        <main style={mainStyle}>
 
-          <main style={mainStyle}>
-
-            <div style={bodyStyle}>
-              <div style={indentStyle}>
+          <div style={preferredContainer}>
+            <div style={preferred}>
               UPA CIN Physician Membership LookUp Application
-            <br/>
-            <br/>
-              Speciality Dropdown Box
-              <br/>
-              Physician Name Listing with
-              <br/>
-              Provider Location Name & Website Address for Contact Options
               <br/>
               <br/>
+              If you are looking for a PCP, search for Primary Care Physician in the Speciality Dropdown Box!
               <br/>
+              <br/>
+              <div style={preferredSpeciality}> Speciality </div>
+              Need DROPDOWN SEARCH!!!
+              <br/>
+              <br/>
+              <div style={preferredPhysician}> Physician </div>
+              Need DROPDOWN SEARCH!!!
+              <br/>
+              <br/>
+              <div style={preferredPractice}> Practice Name </div>
+              <br/>
+              <div style={preferredPhone}> Practice Phone Number </div>
+              <br/>
+              <div style={preferredWebsite}> Practice Website Address </div>
+              <br/>
+            </div>
+          </div>
+        </main>
+
+            <div style={footerStyle}>
+              <div style={indentStyle}>
               Medical Advocacy Partners: Assisting with Navigation to Pay-For-Performance & Quality Healthcare
               </div>
-
-
-
             </div>
-          </main>
+
+
 
 
         <MessageButton/>
