@@ -8,13 +8,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import {Link} from "react-router";
 import Responsive from 'react-responsive';
-import IconButton from 'material-ui/IconButton';
-import Burger from 'material-ui/svg-icons/Navigation/menu';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 import MessageButton from 'components/MessageButton';
-import NavBar from 'components/NavBar';
-import NavMobile from 'components/NavMobile';
 
 
 export default class Home extends React.PureComponent {
@@ -50,8 +44,6 @@ export default class Home extends React.PureComponent {
       fontSize: "20px",
       color: "#31137C"
     }
-
-
     const preferredContainer={
       justifyContent: "center",
       background: "#FCFAF1",
@@ -151,9 +143,6 @@ export default class Home extends React.PureComponent {
               Medical Advocacy Partners: Assisting with Navigation to Pay-For-Performance & Quality Healthcare
               </div>
             </div>
-
-
-
 
         <MessageButton/>
 

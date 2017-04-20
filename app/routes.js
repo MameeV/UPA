@@ -25,26 +25,6 @@ export default function createRoutes() {
     },
 
     {
-    path: '/articles',
-    name: 'Articles',
-    getComponent(nextState, cb) {
-      import('containers/Articles')
-        .then(loadModule(cb))
-        .catch(errorLoading);
-      },
-    },
-
-    {
-    path: '/links',
-    name: 'Links',
-    getComponent(nextState, cb) {
-      import('containers/Links')
-        .then(loadModule(cb))
-        .catch(errorLoading);
-      },
-    },
-
-    {
     path: '/dashboard',
     name: 'Dashboard',
     getComponent (nextState, cb) {
