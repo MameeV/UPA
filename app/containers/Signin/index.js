@@ -6,8 +6,54 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
+import MessageButton from 'components/MessageButton';
 
 export default class Signin extends React.PureComponent {
+  constructor(props){
+    super(props);
+    this.state={
+      username: "",
+      password: ""
+    }
+  }
+  handleUsername = (event) => {
+    this.setState({
+      username: event.target.value
+    })
+  }
+  handlePassword = (event) => {
+    this.setState({
+      password: event.targetl.value
+    })
+  }
+  signin = () => {
+    var data = new FormData();
+    data.append ("username", this.state.username);
+    data.append ("password", this.state.password);
+
+    fetch ("" , {
+      method: "post",
+      body: data
+    })
+    .then (function(response){
+      return response.json();
+    })
+    .then (function(json){
+      if (json.error){
+        alert (json.error);
+      }
+      else if (json.token === false)
+      {
+        alert ("Invalid Credentials");
+      }
+      else if (json.token !== false)
+      {
+        sessionStorage.setItem ("token", json.token);
+        alert ("Welcome Back!");
+      }
+    })
+  }
+
   render() {
     const titleStyle={
       width: "100%",
@@ -72,7 +118,17 @@ export default class Signin extends React.PureComponent {
       height: "auto",
       background: "#74D1EA",
     }
-
+    const issueStyle={
+      width: "100%",
+      height: "auto",
+      fontFamily: "Raleway",
+      fontSize: "18px",
+      color: "#74D1EA",
+      textAlign: "center",
+      paddingTop: "30px",
+      paddingBottom: "20px",
+      background: "#31137C"
+    }
 
     return (
       <div>
@@ -81,17 +137,21 @@ export default class Signin extends React.PureComponent {
         <div style={headTextStyle}>
           Dashboard Sign In Page
         </div>
-      <main>
-        <div style={titleStyle}>UPA CIN Physician Membership Database</div>
-        <div style={accessContainer}>
-          <div style={access}>
-            <div style={accessEmail}> "Enter Your Email Address" </div>
-            <div style={accessPassword}> "Enter Your Password" </div>
-
+        <main>
+          <div style={titleStyle}>UPA CIN Physician Membership Database</div>
+          <div style={accessContainer}>
+            <div style={access}>
+              <div style={accessEmail}> "Enter Your Email Address" </div>
+              <div style={accessPassword}> "Enter Your Password" </div>
+              <div style={issueStyle}>
+                If you can not signin click the COMMENT button and send a message about your issue.
+                <br/>
+                You can expect a reply, to your email address, within 24 to 48 hours.
+              </div>
+            </div>
           </div>
-        </div>
-      </main>
-
+        </main>
+        <MessageButton/>
       </div>
     );
   }
