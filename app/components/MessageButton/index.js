@@ -38,7 +38,7 @@ class MessageButton extends React.PureComponent {
     const footerStyle={
       background: "#74D1EA",
       position: "fixed",
-      bottom: "40px",
+      bottom: "20px",
       right: "10px",
       padding: "15px",
       borderRadius: "50px",

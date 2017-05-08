@@ -144,7 +144,7 @@ export default class Signin extends React.PureComponent {
               <div style={accessEmail}> "Enter Your Email Address" </div>
               <div style={accessPassword}> "Enter Your Password" </div>
               <div style={issueStyle}>
-                If you can not signin click the COMMENT button and send a message about your issue.
+                If you can not sign in click the COMMENT button and send a message about your issue.
                 <br/>
                 You can expect a reply, to your email address, within 24 to 48 hours.
               </div>
