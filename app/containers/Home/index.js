@@ -18,9 +18,7 @@ export default class Home extends React.PureComponent {
     super(props);
     this.state={
       value:0,
-      speciality:[
-
-      ]
+      speciality:[]
     }
   }
 
@@ -31,11 +29,11 @@ export default class Home extends React.PureComponent {
       return response.json();
     })
     .then(function(json){
-      
       this.setState({
         speciality:json
       })
     }.bind(this))
+
   }
 
   handleChange = (event, index, value) => this.setState({value});
@@ -175,11 +173,14 @@ export default class Home extends React.PureComponent {
               <br/>
               <div style={textStyle}> If you are looking for a PCP, search for Primary Care Physician in this Speciality Dropdown Box! </div>
               <div style={preferredSpeciality}>
+              {this.state.speciality.map((s, i) => (
+                <span>{s.name}</span>
 
+              ))}
                 <SelectField floatingLabelText="Speciality" value={this.state.value} onChange={this.handleChange}>
                 {this.state.speciality.map((s, i) => (
-                  <MenuItem value={1} primaryText={
-                      <Link to={`/speciality/${i}`} style={speciality} key={i}>{s.speciality}</Link>
+                  <MenuItem value={s.id} primaryText={
+                      <Link to={`/speciality/${s.id}`} style={speciality} key={i}>{s.name}</Link>
                     }
                   />
                 ))}
