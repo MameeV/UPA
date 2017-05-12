@@ -18,7 +18,8 @@ export default class Home extends React.PureComponent {
     super(props);
     this.state={
       value:0,
-      speciality:[]
+      speciality:[],
+      physician:[],
     }
   }
 
@@ -35,6 +36,28 @@ export default class Home extends React.PureComponent {
     }.bind(this))
 
   }
+
+//  constructor (props){
+//    super(props);
+//    this.state={
+//      value:0,
+//      physician:[],
+//    }
+//  }
+//
+//  post Speciality
+//    fetch('http://localhost:8000/api/getPhysician')
+//
+//    .then(function(response){
+//      return response.json();
+//    })
+//    .then(function(json){
+//      this.setState({
+//        physician:json
+//      })
+//    }.bind(this))
+//
+//  }
 
   handleChange = (event, index, value) => this.setState({value});
 
@@ -96,10 +119,10 @@ export default class Home extends React.PureComponent {
       width: "100%",
       height: "100px",
       background: "#74D1EA",
-      fontFamily: "Raleway+Dots",
+      fontFamily: "Raleway",
       fontSize: "20px",
       color: "#31137C",
-      paddingTop: "35px",
+      paddingTop: "15px",
       paddingLeft: "15px"
     }
     const preferredPhysician={
@@ -146,10 +169,21 @@ export default class Home extends React.PureComponent {
       color: "#31137C",
       fontSize: "20px"
     }
+    const selectStyle={
+      width: "100%",
+      fontFamily:"Raleway",
+      fontWeight:"Bold",
+      fontSize: "30px",
+      color: "#000000",
+      textDecoration: "none",
+      display:'block',
+    }
+
+
 
     return (
       <div>
-        <Helmet title="Home" meta={[ { name: 'description', content: 'Searchable CIN Application' }]}/>
+        <Helmet title="CIN" meta={[ { name: 'description', content: 'UPAs Searchable CIN Application' }]}/>
 
         <header>
 
@@ -173,14 +207,10 @@ export default class Home extends React.PureComponent {
               <br/>
               <div style={textStyle}> If you are looking for a PCP, search for Primary Care Physician in this Speciality Dropdown Box! </div>
               <div style={preferredSpeciality}>
-              {this.state.speciality.map((s, i) => (
-                <span>{s.name}</span>
-
-              ))}
-                <SelectField floatingLabelText="Speciality" value={this.state.value} onChange={this.handleChange}>
+                <SelectField style={selectStyle} floatingLabelText="Choose A Speciality" value={this.state.value} onChange={this.handleChange}>
                 {this.state.speciality.map((s, i) => (
                   <MenuItem value={s.id} primaryText={
-                      <Link to={`/speciality/${s.id}`} style={speciality} key={i}>{s.name}</Link>
+                      <Link to={`/speciality/${s.id}`} style={selectStyle} key={i}>{s.name}</Link>
                     }
                   />
                 ))}
@@ -188,12 +218,11 @@ export default class Home extends React.PureComponent {
                 </SelectField>
 
               </div>
-              Speciality Dropdown Search Box
               <br/>
               <br/>
               <br/>
               <br/>
-              <div style={textStyle}> Select or Search for a Physician to Reveal Their Contact & Location Information </div>
+              <div style={textStyle}> Select or Search for a Physician to Reveal Contact Information </div>
               <div style={preferredPhysician}>
               </div>
               (You Can Search for Physician Names Without Choosing a Specialty)

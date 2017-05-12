@@ -141,7 +141,7 @@ export default class SignUp extends React.PureComponent {
 
     return (
       <div>
-        <Helmet title="SignUp" meta={[ { name: 'description', content: 'Description of Signup' }]}/>
+        <Helmet title="Enroll" meta={[ { name: 'description', content: 'Please SignUp for Access To UPAs CIN Membership Application' }]}/>
         <div style={headTextStyle}>
           Sign Up For Dashboard Access
         </div>
@@ -150,7 +150,7 @@ export default class SignUp extends React.PureComponent {
           <div style={registerContainer}>
             <div style={register}>
               <textarea style={registerEmail} onChange={this.handleEmail} value={this.state.email} type="text" placeholder="Enter Your Email Address"/>
-              <textarea style={registerUsername} onChange={this.handleUsername} value={this.state.username} type="text" placeholder="Choose A Username"/>
+              <textarea style={registerUsername} onChange={this.handleUsername} value={this.state.username} type="text" placeholder="Please Enter Your Name"/>
               <textarea style={registerPassword} onChange={this.handlePassword} value={this.state.password} type="text" placeholder="Choose A Password"/>
               <input style={inputSubmit} on TouchTap={this.signup} type="submit"/>
             </div>
