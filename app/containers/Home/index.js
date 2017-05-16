@@ -19,7 +19,7 @@ export default class Home extends React.PureComponent {
     this.state={
       value:0,
       speciality:[],
-      physician:[],
+      physicians:[],
     }
   }
 
@@ -34,32 +34,43 @@ export default class Home extends React.PureComponent {
         speciality:json
       })
     }.bind(this))
-
   }
 
-//  constructor (props){
-//    super(props);
-//    this.state={
-//      value:0,
-//      physician:[],
-//    }
-//  }
-//
-//  post Speciality
-//    fetch('http://localhost:8000/api/getPhysician')
-//
-//    .then(function(response){
-//      return response.json();
-//    })
-//    .then(function(json){
-//      this.setState({
-//        physician:json
-//      })
+  handleChange = (event, index, value) => {
+    this.setState({
+      value:value
+    })
+    .then(function() {
+      this.selectSpeciality();
+    }.bind(this))
+  };
+
+  selectSpeciality = () => {
+    var data = new FormData();
+    data.append('speciality', this.state.value);
+
+
+    fetch ('http://localhost:8000/api/selectSpeciality', {
+      method: "post",
+      body: data
+    })
+    .then (function(response) {
+      return response.json();
+    })
+    .then (function(json) {
+      physicians:json
+    })
+  }
+
+  //data.append('practice', this.state.practice);
+  //data.append('phone', this.state.phone);
+  //data.append('website', this.state.website);
+
 //    }.bind(this))
 //
 //  }
 
-  handleChange = (event, index, value) => this.setState({value});
+
 
   render() {
     const titleStyle={
@@ -210,7 +221,7 @@ export default class Home extends React.PureComponent {
                 <SelectField style={selectStyle} floatingLabelText="Choose A Speciality" value={this.state.value} onChange={this.handleChange}>
                 {this.state.speciality.map((s, i) => (
                   <MenuItem value={s.id} primaryText={
-                      <Link to={`/speciality/${s.id}`} style={selectStyle} key={i}>{s.name}</Link>
+                      s.name
                     }
                   />
                 ))}
@@ -224,6 +235,9 @@ export default class Home extends React.PureComponent {
               <br/>
               <div style={textStyle}> Select or Search for a Physician to Reveal Contact Information </div>
               <div style={preferredPhysician}>
+                {this.state.physicians.map((p, i) => (
+                  <div style={selectStyle}> {p.physician} </div>
+                ))}
               </div>
               (You Can Search for Physician Names Without Choosing a Specialty)
               <br/>
