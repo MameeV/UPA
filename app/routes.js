@@ -25,6 +25,16 @@ export default function createRoutes() {
     },
 
     {
+    path: '/details',
+    name: 'Details',
+    getComponent(nextState, cb) {
+      import('containers/Details')
+        .then(loadModule(cb))
+        .catch(errorLoading);
+      },
+    },
+
+    {
     path: '/dashboard',
     name: 'Dashboard',
     getComponent (nextState, cb) {
@@ -53,7 +63,7 @@ export default function createRoutes() {
           .catch(errorLoading);
       },
     },
-    
+
    {
     path: '*',
     name: 'notfound',

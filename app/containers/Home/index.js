@@ -17,7 +17,7 @@ export default class Home extends React.PureComponent {
   constructor (props){
     super(props);
     this.state={
-      value:0,
+      value:"",
       speciality:[],
       physicians:[],
     }
@@ -39,8 +39,7 @@ export default class Home extends React.PureComponent {
   handleChange = (event, index, value) => {
     this.setState({
       value:value
-    })
-    .then(function() {
+    },function() {
       this.selectSpeciality();
     }.bind(this))
   };
@@ -58,8 +57,11 @@ export default class Home extends React.PureComponent {
       return response.json();
     })
     .then (function(json) {
-      physicians:json
-    })
+      this.setState({
+        physicians:json
+      })
+
+    }.bind(this))
   }
 
   //data.append('practice', this.state.practice);
@@ -218,7 +220,7 @@ export default class Home extends React.PureComponent {
               <br/>
               <div style={textStyle}> If you are looking for a PCP, search for Primary Care Physician in this Speciality Dropdown Box! </div>
               <div style={preferredSpeciality}>
-                <SelectField style={selectStyle} floatingLabelText="Choose A Speciality" value={this.state.value} onChange={this.handleChange}>
+                <SelectField style={selectStyle} hintText="Choose A Speciality" value={this.state.value} onChange={this.handleChange}>
                 {this.state.speciality.map((s, i) => (
                   <MenuItem value={s.id} primaryText={
                       s.name
@@ -235,9 +237,13 @@ export default class Home extends React.PureComponent {
               <br/>
               <div style={textStyle}> Select or Search for a Physician to Reveal Contact Information </div>
               <div style={preferredPhysician}>
+                <SelectField style={selectStyle}>
                 {this.state.physicians.map((p, i) => (
-                  <div style={selectStyle}> {p.physician} </div>
+                  <Link to={`/details/${p.id}`}>
+                    <MenuItem value={p.id} primaryText={p.physician}/>
+                  </Link>
                 ))}
+                </SelectField>
               </div>
               (You Can Search for Physician Names Without Choosing a Specialty)
               <br/>
