@@ -23,7 +23,7 @@ export default class Signin extends React.PureComponent {
   }
   handlePassword = (event) => {
     this.setState({
-      password: event.targetl.value
+      password: event.target.value
     })
   }
   signin = () => {
@@ -31,7 +31,7 @@ export default class Signin extends React.PureComponent {
     data.append ("username", this.state.username);
     data.append ("password", this.state.password);
 
-    fetch ("" , {
+    fetch ("http://localhost:8000/api/signin" , {
       method: "post",
       body: data
     })
@@ -49,7 +49,8 @@ export default class Signin extends React.PureComponent {
       else if (json.token !== false)
       {
         sessionStorage.setItem ("token", json.token);
-        alert ("Welcome Back!");
+
+        this.context.router.push("/dashboard");
       }
     })
   }

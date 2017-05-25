@@ -35,11 +35,11 @@ export default class SignUp extends React.PureComponent {
 
   signup = () => {
     var data = new FormData();
-    data.append ("username", this.state.username);
-    data.append ("password", this.state.password);
-    data.append ("email", this.state.email);
+    data.append("username", this.state.username);
+    data.append("password", this.state.password);
+    data.append("email", this.state.email);
 
-    fetch ("", {
+    fetch("http://localhost:8000/api/signup", {
       method: "post",
       body: data
     })
@@ -51,9 +51,14 @@ export default class SignUp extends React.PureComponent {
         alert (json.error);
       }
       else if (json.success) {
+        this.setState({
+          username:"",
+          password:"",
+          email:"",
+        })
         alert (json.success);
       }
-    })
+    }.bind(this))
   }
 
   render() {
@@ -99,7 +104,10 @@ export default class SignUp extends React.PureComponent {
       width: "25%",
       height: "100%",
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      fontFamily: "Raleway",
+      fontSize: "20px",
+      color: "#000000",
     }
     const registerEmail={
       width: "100%",
@@ -149,10 +157,10 @@ export default class SignUp extends React.PureComponent {
           <div style={titleStyle}>UPA CIN Physician Membership Database</div>
           <div style={registerContainer}>
             <div style={register}>
-              <textarea style={registerEmail} onChange={this.handleEmail} value={this.state.email} type="text" placeholder="Enter Your Email Address"/>
-              <textarea style={registerUsername} onChange={this.handleUsername} value={this.state.username} type="text" placeholder="Please Enter Your Name"/>
-              <textarea style={registerPassword} onChange={this.handlePassword} value={this.state.password} type="text" placeholder="Choose A Password"/>
-              <input style={inputSubmit} on TouchTap={this.signup} type="submit"/>
+              <label style={registerEmail}> Email: <input onChange={this.handleEmail} style={registerEmail} value={this.state.email}/> </label>
+              <label style={registerUsername}> Name: <input onChange={this.handleUsername} style={registerUsername} value={this.state.username}/> </label>
+              <label style={registerPassword}> Password: <input onChange={this.handlePassword} style={registerPassword} value={this.state.password}/> </label>
+              <input onTouchTap={()=>this.signup()} type="submit" value="SUBMIT" style={inputSubmit}/>
             </div>
           </div>
           <div style={issueStyle}>

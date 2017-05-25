@@ -6,7 +6,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-
+import NavButton from 'components/NavButton';
 
 export default class Dashboard extends React.PureComponent {
   constructor(props){
@@ -16,39 +16,42 @@ export default class Dashboard extends React.PureComponent {
       physician: "",
       practice: "",
       phone: "",
-      website: ""
+      website: "",
+      token: sessionStorage.getItem("token")
     }
   }
+
+  componentWillMount(){
+    if(!this.state.token){
+      this.context.router.push("/signin");
+    }
+  }
+
   handleSpeciality = (event) => {
     this.setState({
       speciality: event.target.value
     })
-    console.log(this.state.speciality)
   }
-  //console log shows whats happening with data. REMOVE logs when finished with project!!!
+
   handlePhysician = (event) => {
     this.setState({
       physician: event.target.value
     })
-    console.log(this.state.physician)
   }
   handlePractice = (event) => {
     this.setState({
       practice: event.target.value
     })
-    console.log(this.state.practice)
   }
   handlePhone = (event) => {
     this.setState({
       phone: event.target.value
     })
-    console.log(this.state.phone)
   }
   handleWebsite = (event) => {
     this.setState({
       website: event.target.value
     })
-    console.log(this.state.website)
   }
 
     storeMember = () => {
@@ -59,13 +62,16 @@ export default class Dashboard extends React.PureComponent {
         data.append("phone", this.state.phone);
         data.append("website", this.state.website);
 
-        fetch ("http://localhost:8000/api/storeMember", {
+        fetch ("http://localhost:8000/api/storeMember?token="+this.state.token, {
           method: "post",
           speciality: data,
           physician: data,
           practice: data,
           phone: data,
           website: data,
+          headers: {
+            "Authorization":"Bearer "+this.state.token
+          }
         })
         .then (function(response) {
           return response.json();
@@ -123,7 +129,10 @@ export default class Dashboard extends React.PureComponent {
       width: "25%",
       height: "100%",
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      fontFamily: "Raleway",
+      fontSize: "20px",
+      color: "#31137C",
     }
     const preferredSpeciality={
       width: "100%",
@@ -173,10 +182,11 @@ export default class Dashboard extends React.PureComponent {
         </div>
       <main>
         <div style={titleStyle}>Enter UPA CIN Physician Membership Database Parts</div>
+
         <div style={preferredContainer}>
-          <div style={preferred}>
-            <textarea style={preferredSpeciality} onChange={this.handleSpeciality} value={this.state.speciality} placeholder="Physician's Speciality"> </textarea>
+          <div style={preferred}>Add Physician to Membership:
             <textarea style={preferredPhysician} onChange={this.handlePhysician} value={this.state.physician} placeholder="Physician's Name"> </textarea>
+            <textarea style={preferredSpeciality} onChange={this.handleSpeciality} value={this.state.speciality} placeholder="Physician's Speciality #"> </textarea>
             <textarea style={preferredPractice} onChange={this.handlePractice} value={this.state.practice} placeholder="Practice Name"> </textarea>
             <textarea style={preferredPhone} onChange={this.handlePhone} value={this.state.phone} placeholder="Practice Phone Number"> </textarea>
             <textarea style={preferredWebsite} onChange={this.handleWebsite} value={this.state.website} placeholder="Practice Website Address"> </textarea>
@@ -184,7 +194,12 @@ export default class Dashboard extends React.PureComponent {
           </div>
         </div>
         </main>
+      <NavButton/>
       </div>
     );
   }
+}
+
+Dashboard.contextTypes={
+  router:React.PropTypes.object
 }

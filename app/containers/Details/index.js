@@ -8,26 +8,39 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import {Link} from "react-router";
 import Responsive from 'react-responsive';
+import NavButton from 'components/NavButton';
 
 export default class Details extends React.PureComponent {
-  render() {
-    const titleStyle={
-      width: "100%",
-      height: "auto",
-      fontFamily: "Raleway Dots",
-      fontSize: "30px",
-      color: "#EB9444",
-      textAlign: "center",
-      paddingTop: "5px",
-      background: "#31137C"
+  constructor(props)
+  {
+    super(props);
+    this.state={
+      physician:'',
     }
+  }
+
+  componentWillMount(){
+    fetch('http://localhost:8000/api/showPhysician/'+this.props.params.id)
+    .then(function(res){
+      return res.json();
+    })
+    .then(function(json){
+      this.setState({
+        physician:json
+      })
+    }.bind(this))
+
+
+}
+
+  render() {
     const headTextStyle={
       width: "100%",
       height: "80px",
       top: "auto",
       borderTop:"3px solid #74D1EA",
       borderBottom:"3px solid #74D1EA",
-      background: "#E7DCEA",
+      background: "#EB9444",
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",
@@ -42,58 +55,74 @@ export default class Details extends React.PureComponent {
     }
     const detailsContainer={
       display: "flex",
-      flexDirection: "row",
-      justifyContent: "center",
-      background: "#E7DCEA",
-      paddingTop: "30px",
-      paddingLeft: "30px",
-      paddingBottom: "30px"
+      flexDirection: "column",
+      flexWrap: "wrap",
+      width: "100%",
+      maxWidth: "500px",
+      margin: "0 auto"
     }
     const detail={
-      width: "25%",
-      height: "100%",
+      width: "100%",
+      height: "auto",
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      padding: "5px"
     }
     const detailPractice={
       width: "100%",
-      display: "flex",
-      flexWrap: "auto",
-      background: "#DB7453",
-      paddingLeft: "5px"
+      height: "auto",
+      fontFamily: "Raleway",
+      fontSize: "20px",
+      color: "#31137C",
+      paddingTop: "10px",
+      display:'block',
     }
     const detailPhone={
       width: "100%",
-      display: "flex",
-      flexWrap: "auto",
-      background: "#D1B6E4",
-      paddingLeft: "5px"
+      height: "auto",
+      fontFamily: "Raleway",
+      fontSize: "20px",
+      color: "#31137C",
+      display:'block',
     }
     const detailWebsite={
       width: "100%",
-      display: "flex",
-      flexWrap: "auto",
-      background: "#74D1EA",
-      paddingLeft: "5px"
+      height: "auto",
+      fontFamily: "Raleway",
+      fontSize: "20px",
+      color: "#31137C",
+      display:'block',
     }
+    const footerStyle={
+      background: "#EB9444",
+      display: "flex",
+      flexDirection: "row",
+      fontFamily:"Raleway",
+      fontWeight:"Bold",
+      color: "#31137C",
+      fontSize: "18px",
+      paddingLeft: "15px"
+    }
+
 
     return (
       <div>
         <Helmet title="Details" meta={[ { name: 'description', content: 'Physician Details' }]}/>
-
-        <div style={headTextStyle}>
-          UPA CIN Physician Name
-        </div>
+        <div style={headTextStyle}> {this.state.physician.physician} </div>
         <main>
-          <div style={titleStyle}>Contact Details</div>
           <div style={detailsContainer}>
             <div style={detail}>
-              <div style={detailPractice}> "See Practice Name" </div>
-              <div style={detailPhone}> "See Phone Number" </div>
-              <div style={detailWebsite}> "See Website Address & Clickable" </div>
+              <div style={detailPractice}> {this.state.physician.practice} </div>
+              <div style={detailPhone}> PHONE #: {this.state.physician.phone} </div>
+              <div style={detailWebsite}> <a href={this.state.physician.website}target='_blank'>Website Link (if available)</a> </div>
             </div>
           </div>
+
         </main>
+        <div style={footerStyle}>
+          &copy; Medical Advocacy Partners. Assisting with Navigation in the Value-Based World of Healthcare
+        </div>
+      <NavButton/>
       </div>
     );
   }

@@ -20,6 +20,7 @@ export default class Home extends React.PureComponent {
       value:"",
       speciality:[],
       physicians:[],
+      disabled:true
     }
   }
 
@@ -48,7 +49,6 @@ export default class Home extends React.PureComponent {
     var data = new FormData();
     data.append('speciality', this.state.value);
 
-
     fetch ('http://localhost:8000/api/selectSpeciality', {
       method: "post",
       body: data
@@ -58,21 +58,12 @@ export default class Home extends React.PureComponent {
     })
     .then (function(json) {
       this.setState({
-        physicians:json
+        physicians:json,
+        disabled:false
       })
 
     }.bind(this))
   }
-
-  //data.append('practice', this.state.practice);
-  //data.append('phone', this.state.phone);
-  //data.append('website', this.state.website);
-
-//    }.bind(this))
-//
-//  }
-
-
 
   render() {
     const titleStyle={
@@ -143,11 +134,12 @@ export default class Home extends React.PureComponent {
       height: "100px",
       paddingTop: "40px",
       background: "#EB9444",
-      fontFamily: "Raleway+Dots",
+      fontFamily: "Raleway",
       fontSize: "20px",
       color: "#31137C",
       paddingTop: "35px",
-      paddingLeft: "15px"
+      paddingLeft: "15px",
+      display:'block'
     }
     const preferredPractice={
       width: "100%",
@@ -180,7 +172,8 @@ export default class Home extends React.PureComponent {
       fontFamily:"Raleway",
       fontWeight:"Bold",
       color: "#31137C",
-      fontSize: "20px"
+      fontSize: "20px",
+      textDecoration: "none",
     }
     const selectStyle={
       width: "100%",
@@ -188,19 +181,21 @@ export default class Home extends React.PureComponent {
       fontWeight:"Bold",
       fontSize: "30px",
       color: "#000000",
-      textDecoration: "none",
-      display:'block',
+      textDecoration: "none"
     }
+    const menuStyle={
+      fontFamily:"Raleway",
+      fontWeight:"Bold",
+      textDecoration: "none",
+      fontSize: "20px",
+      color: "#000000",
 
-
+    }
 
     return (
       <div>
-        <Helmet title="CIN" meta={[ { name: 'description', content: 'UPAs Searchable CIN Application' }]}/>
-
+        <Helmet title="CIN" meta={[ { name: 'description', content: 'UPAs CIN LookUp Application' }]}/>
         <header>
-
-
           <span style={titleStyle}>
             <img style={logoStyle} src="http://h4z.it/Image/7e3c1e_UPA.jpg"/>
           <div style={headingStyle}>
@@ -209,10 +204,7 @@ export default class Home extends React.PureComponent {
             Physician LookUp Application
           </div>
           </span>
-
-
         </header>
-
         <main style={mainStyle}>
           <div style={preferredContainer}>
             <div style={preferred}>
@@ -222,52 +214,31 @@ export default class Home extends React.PureComponent {
               <div style={preferredSpeciality}>
                 <SelectField style={selectStyle} hintText="Choose A Speciality" value={this.state.value} onChange={this.handleChange}>
                 {this.state.speciality.map((s, i) => (
-                  <MenuItem value={s.id} primaryText={
-                      s.name
-                    }
-                  />
+                  <MenuItem value={s.id} primaryText={s.name}/>
                 ))}
-
                 </SelectField>
-
               </div>
               <br/>
               <br/>
-              <br/>
-              <br/>
-              <div style={textStyle}> Select or Search for a Physician to Reveal Contact Information </div>
+              <div style={textStyle}> Select a Physician to Reveal Contact Information </div>
               <div style={preferredPhysician}>
-                <SelectField style={selectStyle}>
+                <SelectField style={selectStyle} disabled={this.state.disabled}>
                 {this.state.physicians.map((p, i) => (
                   <Link to={`/details/${p.id}`}>
-                    <MenuItem value={p.id} primaryText={p.physician}/>
+                    <MenuItem style={menuStyle} value={p.id} primaryText={p.physician}/>
                   </Link>
                 ))}
                 </SelectField>
               </div>
-              (You Can Search for Physician Names Without Choosing a Specialty)
-              <br/>
-              <br/>
-              <br/>
-              Physician Practice Location, Phone Number & Website:
-              <div style={preferredPractice}>  </div>
-              <br/>
-              <div style={preferredPhone}>  </div>
-              <br/>
-              <div style={preferredWebsite}>  </div>
-              <br/>
             </div>
           </div>
         </main>
-
-            <div style={footerStyle}>
-              <div style={indentStyle}>
-              &copy; Medical Advocacy Partners. Assisting with Navigation through the Value-Based World of Healthcare
-              </div>
+          <div style={footerStyle}>
+            <div style={indentStyle}>
+            &copy; Medical Advocacy Partners. Assisting with Navigation in the Value-Based World of Healthcare
             </div>
-
+          </div>
         <MessageButton/>
-
       </div>
     );
   }
