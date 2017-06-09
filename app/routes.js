@@ -45,7 +45,7 @@ export default function createRoutes() {
     },
 
     {
-    path: '/edit',
+    path: '/edit/:id',
     name: 'Edit',
     getComponent (nextState, cb) {
         import('containers/Edit')

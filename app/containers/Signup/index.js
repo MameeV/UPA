@@ -6,7 +6,6 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import MessageButton from 'components/MessageButton';
 
 export default class SignUp extends React.PureComponent {
   constructor(props) {
@@ -138,7 +137,7 @@ export default class SignUp extends React.PureComponent {
       <div>
         <Helmet title="Enroll" meta={[{
             name: 'description',
-            content: 'Please SignUp for Access To UPAs CIN Membership Application'
+            content: 'SignUp for CIN Membership Database Access'
           }
         ]}/>
         <div style={headTextStyle}>
@@ -169,7 +168,7 @@ export default class SignUp extends React.PureComponent {
             You can expect a reply, to your email address, within 24 to 48 hours.
           </div>
         </main>
-        <MessageButton/>
+
       </div>
     );
   }

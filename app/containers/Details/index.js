@@ -100,7 +100,7 @@ export default class Details extends React.PureComponent {
       <div>
         <Helmet title="Details" meta={[{
             name: 'description',
-            content: 'Physician Details'
+            content: 'Member Details'
           }
         ]}/>
         <div style={headTextStyle}>

@@ -20,102 +20,23 @@ export default class Edit extends React.PureComponent {
       practice: '',
       phone: '',
       website: '',
-      value: '',
-      physicians: [],
-      data: '',
       token: sessionStorage.getItem('token')
     };
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/api/getPhysician').then(function(response) {
-      return response.json();
+    fetch('http://localhost:8000/api/showPhysician/' + this.props.params.id).then(function(res) {
+      return res.json();
     }).then(function(json) {
-      this.setState({physicians: json});
+      this.setState({
+        physician: json.physician,
+        practice: json.practice,
+        phone: json.phone,
+        website: json.website,
+        speciality: json.speciality
+      });
     }.bind(this));
   }
-
-  handleChange = (event, index, value) => {
-    var physicians = this.state.physicians;
-
-    for (var i = 0; i < physicians.length; i++) {
-      if (value == physicians[i].id) {
-        this.setState({speciality: physicians[i].speciality, physician: physicians[i].physician, practice: physicians[i].practice, phone: physicians[i].phone, website: physicians[i].website});
-      }
-    }
-  };
-
-  showPhysician = () => {
-    const detailsContainer = {
-      display: 'flex',
-      flexDirection: 'column',
-      flexWrap: 'wrap',
-      width: '100%',
-      maxWidth: '500px',
-      margin: '0 auto'
-    };
-    const detail = {
-      width: '100%',
-      height: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
-      padding: '5px'
-    };
-    const detailName = {
-      width: '100%',
-      height: 'auto',
-      fontFamily: 'Raleway',
-      fontSize: '20px',
-      color: '#31137C',
-      display: 'block'
-    };
-    const detailPractice = {
-      width: '100%',
-      height: 'auto',
-      fontFamily: 'Raleway',
-      fontSize: '20px',
-      color: '#31137C',
-      paddingTop: '20px',
-      display: 'block'
-    };
-    const detailPhone = {
-      width: '100%',
-      height: 'auto',
-      fontFamily: 'Raleway',
-      fontSize: '20px',
-      color: '#31137C',
-      display: 'block'
-    };
-    const detailWebsite = {
-      width: '100%',
-      height: 'auto',
-      fontFamily: 'Raleway',
-      fontSize: '20px',
-      color: '#31137C',
-      display: 'block'
-    };
-    if (this.state.data !== '')
-
-      return (
-        <div style={detailsContainer}>
-          <div style={detail}>
-            <div style={detailName}>
-              {this.state.data.physician}
-            </div>
-            <div style={detailPractice}>
-              {this.state.data.practice}
-            </div>
-            <div style={detailPhone}>
-              {this.state.data.phone}
-            </div>
-            <div style={detailWebsite}>
-              {this.state.data.website}
-            </div>
-            <br/>
-          </div>
-        </div>
-      );
-    }
 
   handleSpeciality = (event) => {
     this.setState({speciality: event.target.value});
@@ -137,7 +58,7 @@ export default class Edit extends React.PureComponent {
     this.setState({website: event.target.value});
   };
 
-  storeMember = () => {
+  updateMember = () => {
     var data = new FormData();
     data.append('speciality', this.state.speciality);
     data.append('physician', this.state.physician);
@@ -145,13 +66,9 @@ export default class Edit extends React.PureComponent {
     data.append('phone', this.state.phone);
     data.append('website', this.state.website);
 
-    fetch('http://localhost:8000/api/storeMember?token=' + this.state.token, {
+    fetch('http://localhost:8000/api/updateMember?token=' + this.state.token, {
       method: 'post',
-      speciality: data,
-      physician: data,
-      practice: data,
-      phone: data,
-      website: data,
+      body:data,
       headers: {
         'Authorization': 'Bearer ' + this.state.token
       }
@@ -280,12 +197,6 @@ export default class Edit extends React.PureComponent {
 
           <div style={dataContainer}>
             <div style={data}>
-              <div style={dataPhysician}>
-                <SelectField style={selectStyle} value={this.state.value} onChange={this.handleChange}>
-                  {this.state.physicians.map((p, i) => (<MenuItem value={p.id} primaryText={p.physician}/>))}
-                </SelectField>
-                {this.showPhysician()}
-              </div>
               <br/>
               <input type="text" style={dataPhysician} onChange={this.handlePhysician} value={this.state.physician} placeholder="Last Name, M. First, MD/DO"/>
               <input type="text" style={dataSpeciality} onChange={this.handleSpeciality} value={this.state.speciality} placeholder="Physician's Speciality #"/>

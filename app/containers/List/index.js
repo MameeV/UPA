@@ -31,11 +31,7 @@ export default class List extends React.PureComponent {
       this.setState({physicians: json});
     }.bind(this));
   }
-  //  handleOpen = () => {
-  //    this.setState({
-  //      contactOpen: true,
-  //    })
-  //  }
+
   handleChange = (event, index, value) => {
     var physicians = this.state.physicians;
 
@@ -45,7 +41,25 @@ export default class List extends React.PureComponent {
       }
     }
   };
-
+  
+  deleteMember=(id)=>{
+    fetch('http://localhost:8000/api/deleteMember'+id,{
+      headers:{"Authorization":"Bearer "+this.state.token},
+      method:"POST",
+      body:data
+    })
+    .then(function(res){
+      return res.json();
+    })
+    .then(function(json){
+      if(json.success){
+        alert(json.success)
+      }else if(json.error){
+        alert(json.error)
+      }
+    })
+  }
+  
   showPhysician = () => {
     const detailsContainer = {
       display: 'flex',
@@ -90,6 +104,30 @@ export default class List extends React.PureComponent {
       color: '#31137C',
       display: 'block'
     };
+    const editStyle = {
+      background: '#74D1EA',
+      position: 'fixed',
+      top: '200px',
+      right: '10px',
+      borderRadius: '50px',
+      fontFamily: 'Raleway',
+      fontWeight: 'Bold',
+      fontStyle: 'Italic',
+      fontSize: '100%',
+      color: '#CA4046'
+    };
+    const deleteStyle = {
+      background: '#CA4046',
+      position: 'fixed',
+      top: '300px',
+      right: '10px',
+      borderRadius: '50px',
+      fontFamily: 'Raleway',
+      fontWeight: 'Bold',
+      fontStyle: 'Italic',
+      fontSize: '100%',
+      color: '#74D1EA'
+    };
     if (this.state.data !== '') {
       return (
         <div style={detailsContainer}>
@@ -106,6 +144,8 @@ export default class List extends React.PureComponent {
             <div style={detailWebsite}>
               <a href={this.state.data.website} target="_blank">Website Link (if available)</a>
             </div>
+            <FlatButton style={editStyle} label="Edit Details" containerElement={< Link to={`/edit/${this.state.data.id}`} > </Link>} onTouchTap={this.handleOpen}/>
+            <FlatButton style={deleteStyle} label="DELETE Physician!" onTouchTap={()=>this.deleteMember(this.state.data.id)}/>
           </div>
         </div>
       );
@@ -170,30 +210,7 @@ export default class List extends React.PureComponent {
       textDecoration: 'none',
       display: 'block'
     };
-    const editStyle = {
-      background: '#74D1EA',
-      position: 'fixed',
-      top: '200px',
-      right: '10px',
-      borderRadius: '50px',
-      fontFamily: 'Raleway',
-      fontWeight: 'Bold',
-      fontStyle: 'Italic',
-      fontSize: '100%',
-      color: '#CA4046'
-    };
-    const deleteStyle = {
-      background: '#CA4046',
-      position: 'fixed',
-      top: '300px',
-      right: '10px',
-      borderRadius: '50px',
-      fontFamily: 'Raleway',
-      fontWeight: 'Bold',
-      fontStyle: 'Italic',
-      fontSize: '100%',
-      color: '#74D1EA'
-    };
+
 
     return (
       <div>
@@ -224,8 +241,6 @@ export default class List extends React.PureComponent {
               </div>
             </div>
           </div>
-          <FlatButton style={editStyle} label="Edit Details" containerElement={< Link to = "/" > </Link>} onTouchTap={this.handleOpen}/>
-          <FlatButton style={deleteStyle} label="DELETE Physician" containerElement={< Link to = "/" > </Link>} onTouchTap={this.handleOpen}/>
         </main>
         <NavButton/>
       </div>

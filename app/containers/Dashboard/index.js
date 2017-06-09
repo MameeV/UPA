@@ -165,7 +165,7 @@ export default class Dashboard extends React.PureComponent {
       <div>
         <Helmet title="Dashboard" meta={[{
             name: 'description',
-            content: 'Description of Dashboard'
+            content: 'Database Dashboard'
           }
         ]}/>
         <div style={headTextStyle}>

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import MessageButton from 'components/MessageButton';
+import NavButton from 'components/NavButton';
 
 export default class Signin extends React.PureComponent {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Signin extends React.PureComponent {
       password: ''
     };
   }
-  handleUsername = (event) => {
+  handleEmail= (event) => {
     this.setState({email: event.target.value});
   }
   handlePassword = (event) => {
@@ -123,9 +123,9 @@ export default class Signin extends React.PureComponent {
 
     return (
       <div>
-        <Helmet title="SignIn" meta={[{
+        <Helmet title="Access" meta={[{
             name: 'description',
-            content: 'Application SignIn Page'
+            content: 'Admin SignIn Page'
           }
         ]}/>
 
@@ -145,15 +145,10 @@ export default class Signin extends React.PureComponent {
                 <input onChange={this.handlePassword} style={accessPassword} value={this.state.password}/>
               </label>
               <input onTouchTap={() => this.signin()} type="submit" value="SUBMIT" style={inputSubmit}/>
-              <div style={issueStyle}>
-                If you can not sign in click the COMMENT button and send a message about your issue.
-                <br/>
-                You can expect a reply, to your email address, within 24 to 48 hours.
-              </div>
             </div>
           </div>
         </main>
-        <MessageButton/>
+        <NavButton/>
       </div>
     );
   }

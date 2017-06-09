@@ -7,7 +7,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
-import MessageButton from 'components/MessageButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -205,7 +204,7 @@ export default class Home extends React.PureComponent {
             &copy; Medical Advocacy Partners. Assisting with Navigation in the Value-Based World of Healthcare
           </div>
         </div>
-        <MessageButton/>
+        
       </div>
     );
   }
