@@ -12,19 +12,19 @@ export default class Signin extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: ''
     };
   }
   handleUsername = (event) => {
-    this.setState({username: event.target.value});
+    this.setState({email: event.target.value});
   }
   handlePassword = (event) => {
     this.setState({password: event.target.value});
   }
   signin = () => {
     var data = new FormData();
-    data.append('username', this.state.username);
+    data.append('email', this.state.email);
     data.append('password', this.state.password);
 
     fetch('http://localhost:8000/api/signin', {
@@ -104,6 +104,11 @@ export default class Signin extends React.PureComponent {
       background: '#D1B6E4',
       paddingLeft: '5px'
     };
+    const inputSubmit = {
+      width: '100%',
+      height: 'auto',
+      background: '#74D1EA'
+    };
     const issueStyle = {
       width: '100%',
       height: 'auto',
@@ -131,12 +136,15 @@ export default class Signin extends React.PureComponent {
           <div style={titleStyle}>UPA CIN Physician Membership Database</div>
           <div style={accessContainer}>
             <div style={access}>
-              <div style={accessEmail}>
-                Enter Your Email Address
-              </div>
-              <div style={accessPassword}>
-                Enter Your Password
-              </div>
+            <label style={accessEmail}>
+              Email:
+              <input onChange={this.handleEmail} style={accessEmail} value={this.state.email}/>
+            </label>
+              <label style={accessPassword}>
+                Password:
+                <input onChange={this.handlePassword} style={accessPassword} value={this.state.password}/>
+              </label>
+              <input onTouchTap={() => this.signin()} type="submit" value="SUBMIT" style={inputSubmit}/>
               <div style={issueStyle}>
                 If you can not sign in click the COMMENT button and send a message about your issue.
                 <br/>
