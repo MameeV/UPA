@@ -55,23 +55,22 @@ export default class Dashboard extends React.PureComponent {
     fetch("http://localhost:8000/api/storeMember?token=" + this.state.token, {
       mode:'no-cors',
       method: 'post',
-      speciality: data,
-      physician: data,
-      practice: data,
-      phone: data,
-      website: data,
+      body:data,
       headers: {
         "Authorization": "Bearer " + this.state.token
       }
-    }).then(function(response) {
+    })
+    .then(function(response) {
       return response.json();
-    }).then(function(json) {
+    })
+    .then(function(json) {
       if (json.success) {
         alert(json.success);
-      } else if (json.error) {
+      } 
+      else if (json.error) {
         alert(json.error);
       }
-    });
+    })
   }
 
   render() {
@@ -177,7 +176,7 @@ export default class Dashboard extends React.PureComponent {
 
           <div style={preferredContainer}>
             <div style={preferred}>Add Physician to Membership:
-              <textarea style={preferredPhysician} onChange={this.handlePhysician} value={this.state.physician} placeholder="Physician's Name"></textarea>
+              <textarea style={preferredPhysician} onChange={this.handlePhysician} value={this.state.physician} placeholder="Last Name, First, I., MD/DO"></textarea>
               <textarea style={preferredSpeciality} onChange={this.handleSpeciality} value={this.state.speciality} placeholder="Physician's Speciality #"></textarea>
               <textarea style={preferredPractice} onChange={this.handlePractice} value={this.state.practice} placeholder="Practice Name"></textarea>
               <textarea style={preferredPhone} onChange={this.handlePhone} value={this.state.phone} placeholder="Practice Phone Number"></textarea>

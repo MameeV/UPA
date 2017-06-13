@@ -15,6 +15,7 @@ export default class Edit extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      id:'',
       speciality: '',
       physician: '',
       practice: '',
@@ -29,6 +30,7 @@ export default class Edit extends React.PureComponent {
       return res.json();
     }).then(function(json) {
       this.setState({
+        id:json.id,
         physician: json.physician,
         practice: json.practice,
         phone: json.phone,
@@ -66,8 +68,7 @@ export default class Edit extends React.PureComponent {
     data.append('phone', this.state.phone);
     data.append('website', this.state.website);
 
-    fetch('http://localhost:8000/api/updateMember?token=' + this.state.token, {
-      mode:'no-cors',
+    fetch('http://localhost:8000/api/updateMember/'+this.state.id+'?token=' + this.state.token, {
       method: 'post',
       body:data,
       headers: {
@@ -204,7 +205,7 @@ export default class Edit extends React.PureComponent {
               <input type="text" style={dataPractice} onChange={this.handlePractice} value={this.state.practice} placeholder="Practice Name"/>
               <input type="text" style={dataPhone} onChange={this.handlePhone} value={this.state.phone} placeholder="Practice Phone Number"/>
               <input type="text" style={dataWebsite} onChange={this.handleWebsite} value={this.state.website} placeholder="Practice Website Address"/>
-              <input style={inputSubmit} onTouchTap={this.storeMember} type="submit"/>
+              <input style={inputSubmit} onTouchTap={this.updateMember} type="submit"/>
             </div>
           </div>
           <div></div>

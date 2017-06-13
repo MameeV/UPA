@@ -21,7 +21,9 @@ export default class List extends React.PureComponent {
       physicians: [],
       data: '',
       physician: '',
-      contactOpen: false
+      contactOpen: false,
+      token:sessionStorage.getItem("token")
+      
     };
   }
 
@@ -44,10 +46,9 @@ export default class List extends React.PureComponent {
   };
   
   deleteMember=(id)=>{
-    fetch('http://localhost:8000/api/deleteMember'+id,{
+    fetch('http://localhost:8000/api/deleteMember/'+id,{
       headers:{"Authorization":"Bearer "+this.state.token},
       method:"POST",
-      body:data
     })
     .then(function(res){
       return res.json();

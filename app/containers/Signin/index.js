@@ -8,6 +8,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import NavButton from 'components/NavButton';
 
+
 export default class Signin extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -23,12 +24,13 @@ export default class Signin extends React.PureComponent {
     this.setState({password: event.target.value});
   }
   signin = () => {
+    var _this = this;
     var data = new FormData();
     data.append('email', this.state.email);
     data.append('password', this.state.password);
 
     fetch('http://localhost:8000/api/signin', {
-      mode:'no-cors',
+      
       method: 'post',
       body: data
     }).then(function(response) {
@@ -41,7 +43,7 @@ export default class Signin extends React.PureComponent {
       } else if (json.token !== false) {
         sessionStorage.setItem('token', json.token);
 
-        this.context.router.push('/dashboard');
+        _this.context.router.push('/dashboard');
       }
     });
   }
@@ -154,3 +156,6 @@ export default class Signin extends React.PureComponent {
     );
   }
 }
+Signin.contextTypes = {
+  router: React.PropTypes.object
+};
