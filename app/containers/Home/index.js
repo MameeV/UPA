@@ -43,7 +43,7 @@ export default class Home extends React.PureComponent {
     data.append('speciality', this.state.value);
 
     fetch('http://localhost:8000/api/selectSpeciality', {
-      mode:'no-cors'
+      mode:'no-cors',
       method: 'post',
       body: data
     }).then(function(response) {

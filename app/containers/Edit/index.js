@@ -67,7 +67,7 @@ export default class Edit extends React.PureComponent {
     data.append('website', this.state.website);
 
     fetch('http://localhost:8000/api/updateMember?token=' + this.state.token, {
-      mode:'no-cors'
+      mode:'no-cors',
       method: 'post',
       body:data,
       headers: {
