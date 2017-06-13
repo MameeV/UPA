@@ -11,6 +11,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import NavButton from 'components/NavButton';
 import FlatButton from 'material-ui/FlatButton';
+import Responsive from 'react-responsive';
 
 export default class List extends React.PureComponent {
   constructor(props) {
@@ -107,7 +108,7 @@ export default class List extends React.PureComponent {
     const editStyle = {
       background: '#74D1EA',
       position: 'fixed',
-      top: '200px',
+      top: '500px',
       right: '10px',
       borderRadius: '50px',
       fontFamily: 'Raleway',
@@ -119,7 +120,7 @@ export default class List extends React.PureComponent {
     const deleteStyle = {
       background: '#CA4046',
       position: 'fixed',
-      top: '300px',
+      top: '550px',
       right: '10px',
       borderRadius: '50px',
       fontFamily: 'Raleway',
@@ -211,7 +212,6 @@ export default class List extends React.PureComponent {
       display: 'block'
     };
 
-
     return (
       <div>
         <Helmet title="List" meta={[{
@@ -223,11 +223,23 @@ export default class List extends React.PureComponent {
         <header>
           <span style={titleStyle}>
             <img style={logoStyle} src="http://h4z.it/Image/7e3c1e_UPA.jpg"/>
+            
+            <Responsive minDeviceWidth={1024}>
             <div style={headingStyle}>
               CIN
               <br/>
               Physician Directory
             </div>
+            </Responsive>
+            
+            <Responsive maxDeviceWidth={1023}>
+            <div style={headingStyle}>
+              CIN
+              <br/>
+              List
+            </div>
+            </Responsive>
+            
           </span>
         </header>
         <main style={mainStyle}>
@@ -235,7 +247,7 @@ export default class List extends React.PureComponent {
             <div style={preferred}>
               <div style={preferredPhysician}>
                 <SelectField style={selectStyle} value={this.state.value} onChange={this.handleChange}>
-                  {this.state.physicians.map((p, i) => (<MenuItem value={p.id} primaryText={p.physician}/>))}
+                  {this.state.physicians.map((p, i) => (<MenuItem value={p.id} style={selectStyle} primaryText={p.physician}/>))}
                 </SelectField>
                 {this.showPhysician()}
               </div>

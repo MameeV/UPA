@@ -33,6 +33,7 @@ export default class SignUp extends React.PureComponent {
     data.append('email', this.state.email);
 
     fetch('http://localhost:8000/api/signup', {
+      mode:'no-cors',
       method: 'post',
       body: data
     }).then(function(response) {
@@ -161,11 +162,6 @@ export default class SignUp extends React.PureComponent {
               </label>
               <input onTouchTap={() => this.signup()} type="submit" value="SUBMIT" style={inputSubmit}/>
             </div>
-          </div>
-          <div style={issueStyle}>
-            If you are unable to enroll, please click the COMMENT button and send a message about your issue.
-            <br/>
-            You can expect a reply, to your email address, within 24 to 48 hours.
           </div>
         </main>
 

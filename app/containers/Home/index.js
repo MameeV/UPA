@@ -9,6 +9,7 @@ import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Responsive from 'react-responsive';
 
 export default class Home extends React.PureComponent {
   constructor(props) {
@@ -42,6 +43,7 @@ export default class Home extends React.PureComponent {
     data.append('speciality', this.state.value);
 
     fetch('http://localhost:8000/api/selectSpeciality', {
+      mode:'no-cors'
       method: 'post',
       body: data
     }).then(function(response) {
@@ -137,20 +139,14 @@ export default class Home extends React.PureComponent {
       width: '100%',
       fontFamily: 'Raleway',
       fontWeight: 'Bold',
-      fontSize: '25px'
-    };
-    const menuStyle = {
-      fontFamily: 'Raleway',
-      fontWeight: 'Bold',
-      fontSize: '20px',
+      fontSize: '25px',
       color: '#000000',
       textDecoration: 'none'
     };
-    // fontFamily:'Raleway',
-    // fontWeight:'Bold',
-    // color: '#31137C',
-    // fontSize: '20px',
-    // textDecoration: 'none',
+    const menuStyle = {
+      color: '#000000',
+      textDecoration: 'none'
+    };
 
     return (
       <div>
@@ -162,11 +158,23 @@ export default class Home extends React.PureComponent {
         <header>
           <span style={titleStyle}>
             <img style={logoStyle} src="http://h4z.it/Image/7e3c1e_UPA.jpg"/>
+            
+            <Responsive minDeviceWidth={1024}>
             <div style={headingStyle}>
               Clinically Integrated Network
               <br/>
               Physician LookUp Application
             </div>
+            </Responsive>
+            
+            <Responsive maxDeviceWidth={1023}>
+            <div style={headingStyle}>
+              CIN
+              <br/>
+              App
+            </div>
+            </Responsive>
+            
           </span>
         </header>
         <main style={mainStyle}>
@@ -179,7 +187,7 @@ export default class Home extends React.PureComponent {
               </div>
               <div style={preferredSpeciality}>
                 <SelectField style={selectStyle} hintText="Choose A Speciality" value={this.state.value} onChange={this.handleChange}>
-                  {this.state.speciality.map((s, i) => (<MenuItem value={s.id} primaryText={s.name}/>))}
+                  {this.state.speciality.map((s, i) => (<MenuItem style={selectStyle} value={s.id} primaryText={s.name}/>))}
                 </SelectField>
               </div>
               <br/>
@@ -190,8 +198,8 @@ export default class Home extends React.PureComponent {
               <div style={preferredPhysician}>
                 <SelectField style={selectStyle} disabled={this.state.disabled}>
                   {this.state.physicians.map((p, i) => (
-                    <Link to={`/details/${p.id}`}>
-                      <MenuItem style={menuStyle} value={p.id} primaryText={p.physician}/>
+                    <Link to={`/details/${p.id}`} style={menuStyle}>
+                      <MenuItem value={p.id} style={selectStyle} primaryText={p.physician}/>
                     </Link>
                   ))}
                 </SelectField>

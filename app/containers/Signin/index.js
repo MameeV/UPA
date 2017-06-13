@@ -28,6 +28,7 @@ export default class Signin extends React.PureComponent {
     data.append('password', this.state.password);
 
     fetch('http://localhost:8000/api/signin', {
+      mode:'no-cors'
       method: 'post',
       body: data
     }).then(function(response) {

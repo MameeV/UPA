@@ -53,6 +53,7 @@ export default class Dashboard extends React.PureComponent {
     data.append('website', this.state.website);
 
     fetch("http://localhost:8000/api/storeMember?token=" + this.state.token, {
+      mode:'no-cors'
       method: 'post',
       speciality: data,
       physician: data,

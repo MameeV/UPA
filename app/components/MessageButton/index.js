@@ -45,7 +45,7 @@ class MessageButton extends React.PureComponent {
     data.append("message",this.state.message);
     data.append("email",this.state.email);
     
-    fetch("http://myhealth-map.com/api/contact",{
+    fetch("http://localhost:8000/api/contact",{
       method:"post",
       body:data
     })
