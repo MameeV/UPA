@@ -52,8 +52,7 @@ export default class Dashboard extends React.PureComponent {
     data.append('phone', this.state.phone);
     data.append('website', this.state.website);
 
-    fetch("http://localhost:8000/api/storeMember?token=" + this.state.token, {
-      mode:'no-cors',
+    fetch("http://myhealth-map.com/api/storeMember?token=" + this.state.token, {
       method: 'post',
       body:data,
       headers: {

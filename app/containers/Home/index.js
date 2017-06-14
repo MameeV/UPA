@@ -23,7 +23,7 @@ export default class Home extends React.PureComponent {
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/api/getSpeciality').then(function(response) {
+    fetch('http://myhealth-map.com/api/getSpeciality').then(function(response) {
       return response.json();
     }).then(function(json) {
       this.setState({speciality: json});
@@ -42,7 +42,7 @@ export default class Home extends React.PureComponent {
     var data = new FormData();
     data.append('speciality', this.state.value);
 
-    fetch('http://localhost:8000/api/selectSpeciality', {
+    fetch('http://myhealth-map.com/api/selectSpeciality', {
       method: 'post',
       body: data
     }).then(function(response) {

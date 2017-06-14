@@ -28,7 +28,7 @@ export default class List extends React.PureComponent {
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/api/getPhysician').then(function(response) {
+    fetch('http://myhealth-map.com/api/getPhysician').then(function(response) {
       return response.json();
     }).then(function(json) {
       this.setState({physicians: json});
@@ -46,7 +46,7 @@ export default class List extends React.PureComponent {
   };
   
   deleteMember=(id)=>{
-    fetch('http://localhost:8000/api/deleteMember/'+id,{
+    fetch('http://myhealth-map.com/api/deleteMember/'+id,{
       headers:{"Authorization":"Bearer "+this.state.token},
       method:"POST",
     })

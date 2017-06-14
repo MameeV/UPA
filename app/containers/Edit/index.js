@@ -26,7 +26,7 @@ export default class Edit extends React.PureComponent {
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/api/showPhysician/' + this.props.params.id).then(function(res) {
+    fetch('http://myhealth-map.com/api/showPhysician/' + this.props.params.id).then(function(res) {
       return res.json();
     }).then(function(json) {
       this.setState({
@@ -68,7 +68,7 @@ export default class Edit extends React.PureComponent {
     data.append('phone', this.state.phone);
     data.append('website', this.state.website);
 
-    fetch('http://localhost:8000/api/updateMember/'+this.state.id+'?token=' + this.state.token, {
+    fetch('http://myhealth-map.com/api/updateMember/'+this.state.id+'?token=' + this.state.token, {
       method: 'post',
       body:data,
       headers: {

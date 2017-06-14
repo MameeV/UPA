@@ -18,7 +18,7 @@ export default class Details extends React.PureComponent {
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/api/showPhysician/' + this.props.params.id).then(function(res) {
+    fetch('http://myhealth-map.com/api/showPhysician/' + this.props.params.id).then(function(res) {
       return res.json();
     }).then(function(json) {
       this.setState({physician: json});
@@ -116,7 +116,7 @@ export default class Details extends React.PureComponent {
                 PHONE #: {this.state.physician.phone}
               </div>
               <div style={detailWebsite}>
-                <a target="_blank href={this.state.physician.website}">Website Link (if available)</a>
+                <a target="_blank" href={this.state.physician.website}>Website Link (if available)</a>
               </div>
             </div>
           </div>
