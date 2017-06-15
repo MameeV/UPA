@@ -105,14 +105,18 @@ export default class Details extends React.PureComponent {
       display: 'block'
     };
     const footerStyle = {
+      width: "100%",
       background: '#EB9444',
       display: 'flex',
       flexDirection: 'row',
+      justifyContent: 'left',
       fontFamily: 'Raleway',
       fontWeight: 'Bold',
       color: '#31137C',
       fontSize: '18px',
-      paddingLeft: '15px'
+      paddingLeft: '15px',
+      position: "fixed",
+      bottom: "5px",
     };
 
     return (

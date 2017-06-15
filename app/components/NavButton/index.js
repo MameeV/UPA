@@ -37,7 +37,7 @@ class NavButton extends React.PureComponent {
     const footerStyle={
       background: "#74D1EA",
       position: "fixed",
-      bottom: "20px",
+      bottom: "100px",
       right: "10px",
       padding: "15px",
       borderRadius: "50px",

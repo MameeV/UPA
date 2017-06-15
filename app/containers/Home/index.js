@@ -119,13 +119,17 @@ export default class Home extends React.PureComponent {
       display: 'block'
     };
     const footerStyle = {
+      width: "100%",
       background: '#EB9444',
       display: 'flex',
       flexDirection: 'row',
+      justifyContent: 'center',
       fontFamily: 'Raleway',
       fontWeight: 'Bold',
       color: '#31137C',
-      fontSize: '18px'
+      fontSize: '18px',
+      position: "fixed",
+      bottom: "5px",
     };
     const textStyle = {
       fontFamily: 'Raleway',

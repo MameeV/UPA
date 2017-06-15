@@ -121,7 +121,7 @@ export default class List extends React.PureComponent {
     const deleteStyle = {
       background: '#CA4046',
       position: 'fixed',
-      top: '550px',
+      top: '600px',
       right: '10px',
       borderRadius: '50px',
       fontFamily: 'Raleway',
