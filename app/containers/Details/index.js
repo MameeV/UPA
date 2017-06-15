@@ -7,6 +7,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
+import Responsive from 'react-responsive';
 import NavButton from 'components/NavButton';
 
 export default class Details extends React.PureComponent {
@@ -44,6 +45,24 @@ export default class Details extends React.PureComponent {
       textTransform: 'uppercase',
       textAlign: 'center',
       paddingTop: '10px'
+    };
+    const headMobileStyle = {
+      width: '100%',
+      height: '80px',
+      top: 'auto',
+      borderTop: '3px solid #74D1EA',
+      borderBottom: '3px solid #74D1EA',
+      background: '#EB9444',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      fontFamily: 'Fredericka the Great',
+      fontStyle: 'cursive',
+      fontWeight: 'bold',
+      fontSize: '24px',
+      color: '#31137C',
+      textAlign: 'center',
+      paddingTop: '14px'
     };
     const detailsContainer = {
       display: 'flex',
@@ -103,9 +122,19 @@ export default class Details extends React.PureComponent {
             content: 'Member Details'
           }
         ]}/>
+        
+        <Responsive minDeviceWidth={1024}>
         <div style={headTextStyle}>
           {this.state.physician.physician}
         </div>
+        </Responsive>
+        
+        <Responsive maxDeviceWidth={1023}>
+        <div style={headMobileStyle}>
+          {this.state.physician.physician}
+        </div>
+        </Responsive>
+        
         <main>
           <div style={detailsContainer}>
             <div style={detail}>
